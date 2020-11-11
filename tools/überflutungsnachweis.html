@@ -1,0 +1,55 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            float: left;
+            width: 15em;
+            margin-right: 1em;
+            text-align: right;
+        }
+    </style>
+    <script src="form-gen.js"></script>
+    <script>
+        // VRück = (r(D,30) * Ages – (r(D,2) * ADach * Cs, Dach + r(D,2) * AFaG * Cs, FaG)))*D*60/10000*1000)
+        var forms = [
+            {
+                name: "Überflutungsnachweis 1",
+                comment: "Zum berechnen von blub uff.<br>Bei V<sub>rück</sub> mit mehr als 70% befestigter Fläche wird r(D,100) statt r(D,30) verwendet.",
+                inputs: {
+                    ages: { label: "A<sub>ges</sub>", unit: "m<sup>2</sup>", comment: "Gesammtfläche" },
+                    adach: { label: "A<sub>Dach</sub>", unit: "m<sup>2</sup>", comment: "Dachfläche" },
+                    rd30: { label: "r<sub>(D,30)</sub>", unit: "m", comment: "PLATZHALTER" },
+                    rd2: { label: "r<sub>(D,2)</sub>", unit: "m", comment: "PLATZHALTER" },
+                    afag: { label: "A<sub>FaG</sub>", unit: "m<sup>2</sup>", comment: "PLATZHALTER" },
+                    csfag: { label: "Cs<sub>FaG</sub>", unit: "m<sup>2</sup>", comment: "PLATZHALTER" },
+                    csdach: { label: "Cs<sub>Dach</sub>", unit: "m<sup>2</sup>", comment: "PLATZHALTER" },
+                    d: { label: "D", unit: "m", comment: "PLATZHALTER" },
+                },
+                outputs: {
+                    vruck: {
+                        label: "V<sub>rück</sub>",
+                        unit: "m<sup>3</sub>/s",
+                        comment: "Bemessungsfall.",
+                        display: "( {v/rd30} * {v/ages} - ( {v/rd2} * {v/adach} * {v/csdach} + {v/rd2} * {v/afag} * {v/csfag} )) * {v/d} * 60 / 10000 * 1000",
+                        calc: (vs) => ( vs.rd30 * vs.ages - ( vs.rd2 * vs.adach * vs.csdach + vs.rd2 * vs.afag * vs.csfag )) * vs.d * 60 / 10000 * 1000
+                    },
+                }
+            }
+        ]
+        window.onload = () => {
+            genForms(forms)
+        }
+    </script>
+</head>
+
+<body>
+    <div id="forms">
+
+    </div>
+</body>
+
+</html>
