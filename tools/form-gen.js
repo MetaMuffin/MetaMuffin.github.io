@@ -8,6 +8,7 @@ function genInput(id, idata, change) {
     einput.id = id;
     einput.type = "number"
     elabel.innerHTML = (idata.comment) ? (idata.comment + ": " + idata.label) : idata.label
+    elabel.classList.add("form-label")
     espan.innerHTML = idata.unit
     einput.onchange = () => {
         change(einput.value)
@@ -38,7 +39,7 @@ function substDisplay(i,o,vars) {
             var ti = i[iid]
             var re = vars ? (displayValue(vars[iid]) + ti.unit) : ti.label
             
-            os = os.replace(`{v/${iid}}`, re)
+            os = os.replaceAll(`{v/${iid}}`, re)
         }
     }
     return os

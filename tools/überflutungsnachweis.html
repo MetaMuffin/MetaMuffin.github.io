@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        label {
+        .form-label {
             float: left;
             width: 15em;
             margin-right: 1em;
             text-align: right;
         }
+        .big {
+            font-size: x-large;
+        }
     </style>
     <script src="form-gen.js"></script>
     <script>
         // VRück = (r(D,30) * Ages – (r(D,2) * ADach * Cs, Dach + r(D,2) * AFaG * Cs, FaG)))*D*60/10000*1000)
-        var forms = [
+        const forms = [
             {
                 name: "Überflutungsnachweis 1",
                 comment: "Zum berechnen von blub uff.<br>Bei V<sub>rück</sub> mit mehr als 70% befestigter Fläche wird r(D,100) statt r(D,30) verwendet.",
@@ -32,8 +35,8 @@
                 outputs: {
                     vruck: {
                         label: "V<sub>rück</sub>",
-                        unit: "m<sup>3</sub>/s",
-                        comment: "Bemessungsfall.",
+                        unit: "m<sup>3</sup>",
+                        comment: "PLATZHALTER",
                         display: "( {v/rd30} * {v/ages} - ( {v/rd2} * {v/adach} * {v/csdach} + {v/rd2} * {v/afag} * {v/csfag} )) * {v/d} * 60 / 10000 * 1000",
                         calc: (vs) => ( vs.rd30 * vs.ages - ( vs.rd2 * vs.adach * vs.csdach + vs.rd2 * vs.afag * vs.csfag )) * vs.d * 60 / 10000 * 1000
                     },
@@ -47,6 +50,9 @@
 </head>
 
 <body>
+
+    <label class="big" for="project-name">Projekt: </label>
+    <input class="big" type="text" name="Projekt" id="project-name">
     <div id="forms">
 
     </div>
